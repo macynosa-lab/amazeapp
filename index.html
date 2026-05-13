@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>AmazeApp · Macy</title>
+
+<!-- PWA -->
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0a0014"/>
+<meta name="description" content="Programa de hábitos de 12 semanas — revertir resistencia a la insulina e hígado graso."/>
+
+<!-- iOS standalone -->
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="AmazeApp"/>
+<link rel="apple-touch-icon" href="/app/icon-180.png"/>
+<link rel="apple-touch-icon" sizes="152x152" href="/app/icon-152.png"/>
+<link rel="apple-touch-icon" sizes="167x167" href="/app/icon-167.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/app/icon-180.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="/app/icon-192.png"/>
+<link rel="icon" type="image/png" sizes="512x512" href="/app/icon-512.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"/>
+<link rel="stylesheet" href="app/styles.css"/>
+<style>
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(194,40,107,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 50% 100%, rgba(250,185,64,0.08) 0%, transparent 60%),
+      #0a0014;
+    color: #F7D9FC;
+    overflow: hidden;
+  }
+  .stage {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    gap: 28px;
+    padding: 24px;
+  }
+  .stage-left {
+    width: 280px; flex-shrink: 0;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .brand {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 58px;
+    line-height: 0.9;
+    color: #F7D9FC;
+    letter-spacing: -0.02em;
+  }
+  .brand .accent { color: #E94F8B; }
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em;
+    color: #FAB940; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .eyebrow::before {
+    content: ''; width: 8px; height: 8px; background: #FAB940;
+    box-shadow: 0 0 12px #FAB940;
+  }
+  .lede {
+    font-family: 'Inter Tight', sans-serif;
+    color: rgba(247,217,252,0.7);
+    font-size: 13px; line-height: 1.5;
+    margin-top: 6px;
+  }
+  .nav-list {
+    display: flex; flex-direction: column; gap: 4px;
+    margin-top: 14px;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 14px;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 14px; font-weight: 500;
+    color: rgba(247,217,252,0.6);
+    background: rgba(247,217,252,0.03);
+    border: 1px solid rgba(247,217,252,0.06);
+    text-align: left; cursor: pointer; width: 100%;
+  }
+  .nav-item .num {
+    font-family: 'Space Mono', monospace; font-size: 9.5px;
+    letter-spacing: 0.14em; color: rgba(247,217,252,0.35);
+    width: 22px;
+  }
+  .nav-item.on {
+    color: #F7D9FC;
+    background: linear-gradient(135deg, rgba(233,79,139,0.2), rgba(91,28,46,0.2));
+    border-color: rgba(233,79,139,0.45);
+    box-shadow: 0 4px 16px rgba(194,40,107,0.2), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  .nav-item.on .num { color: #FAB940; }
+  .footer-note {
+    font-family: 'Space Mono', monospace;
+    font-size: 9.5px; letter-spacing: 0.16em;
+    color: rgba(247,217,252,0.35);
+    text-transform: uppercase;
+    margin-top: 18px;
+  }
+  .phone-wrap {
+    transform-origin: center;
+    filter: drop-shadow(0 60px 80px rgba(0,0,0,0.5));
+  }
+  /* fixed phone size — scale on small viewports */
+  @media (max-height: 920px) { .phone-wrap { transform: scale(0.92); } }
+  @media (max-height: 840px) { .phone-wrap { transform: scale(0.85); } }
+  @media (max-width: 720px) {
+    .stage { padding: 12px; gap: 12px; }
+    .stage-left { display: none; }
+  }
+  .pixel-edge {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(247,217,252,0.18), transparent);
+    margin: 14px 0;
+  }
+  .stage-right {
+    width: 220px; flex-shrink: 0;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .info-card {
+    background: rgba(247,217,252,0.04);
+    border: 1px solid rgba(247,217,252,0.08);
+    border-radius: 16px; padding: 14px;
+  }
+  .info-card .k {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em; color: #FAB940;
+    text-transform: uppercase;
+  }
+  .info-card .v {
+    font-family: 'DM Serif Display', serif; font-style: italic;
+    font-size: 22px; color: #F7D9FC; line-height: 1; margin-top: 4px;
+  }
+  .info-card .sub {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 12px; color: rgba(247,217,252,0.6); margin-top: 4px;
+    line-height: 1.4;
+  }
+  @media (max-width: 1080px) { .stage-right { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="stage" data-screen-label="01 App Hábitos">
+  <aside class="stage-left">
+    <span class="eyebrow">App Hábitos · v0.9</span>
+    <h1 class="brand">macy<span class="accent">.</span></h1>
+    <p class="lede">programa 12 semanas · revertir resistencia a la insulina e hígado graso · suplementos, entrenos y anclas diarias.</p>
+    <div class="pixel-edge"></div>
+    <div class="eyebrow" style="font-size:9px">Pantallas</div>
+    <div class="nav-list" id="navList"></div>
+    <div class="footer-note">✦ y2k iOS · prototype ✦</div>
+  </aside>
+
+  <div class="phone-wrap" id="phoneWrap"></div>
+
+  <aside class="stage-right">
+    <div class="info-card">
+      <div class="k">Hoy</div>
+      <div class="v">12 mayo</div>
+      <div class="sub">martes · día 9 · semana 2</div>
+    </div>
+    <div class="info-card">
+      <div class="k">Sesión de hoy</div>
+      <div class="v">cardio z2</div>
+      <div class="sub">45 min · 114–125 lpm · rpe 5–6</div>
+    </div>
+    <div class="info-card">
+      <div class="k">Adherencia</div>
+      <div class="v">84%</div>
+      <div class="sub">racha de 12 días · objetivo 90%</div>
+    </div>
+  </aside>
+</div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="app/data.js"></script>
+<script type="text/babel" src="app/icons.jsx"></script>
+<script type="text/babel" src="app/ios-frame.jsx"></script>
+<script type="text/babel" src="app/ui.jsx"></script>
+<script type="text/babel" src="app/store.jsx"></script>
+<script type="text/babel" src="app/ocr.jsx"></script>
+<script type="text/babel" src="app/pdf-report.jsx"></script>
+<script type="text/babel" src="app/today.jsx"></script>
+<script type="text/babel" src="app/workout.jsx"></script>
+<script type="text/babel" src="app/progress.jsx"></script>
+<script type="text/babel" src="app/health.jsx"></script>
+<script type="text/babel" src="app/profile.jsx"></script>
+
+<script type="text/babel" data-presets="env,react">
+  const { useState } = React;
+
+  function App() {
+    const [tab, setTab] = useState('today');
+
+    const screens = {
+      today: <TodayScreen/>,
+      workout: <WorkoutScreen/>,
+      progress: <ProgressScreen/>,
+      health: <HealthScreen/>,
+      profile: <ProfileScreen/>,
+    };
+
+    // populate sidebar nav
+    React.useEffect(() => {
+      const nav = document.getElementById('navList');
+      if (!nav) return;
+      nav.innerHTML = '';
+      const items = [
+        ['today', 'Hoy'],
+        ['workout', 'Entreno'],
+        ['progress', 'Progreso'],
+        ['health', 'Salud'],
+        ['profile', 'Perfil'],
+      ];
+      items.forEach(([id, label], i) => {
+        const btn = document.createElement('button');
+        btn.className = 'nav-item' + (id === tab ? ' on' : '');
+        btn.innerHTML = `<span class="num">${String(i + 1).padStart(2, '0')}</span><span>${label}</span>`;
+        btn.onclick = () => setTab(id);
+        nav.appendChild(btn);
+      });
+    }, [tab]);
+
+    return (
+      <IOSDevice width={402} height={874} dark>
+        <div className="app-canvas">
+          <div className="screen">
+            {screens[tab]}
+            <TabBar active={tab} setActive={setTab}/>
+          </div>
+        </div>
+      </IOSDevice>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('phoneWrap')).render(
+    <AppProvider><App/></AppProvider>
+  );
+</script>
+
+<script>
+  // Register service worker (only when served over http/https, not file://)
+  if ('serviceWorker' in navigator && /^https?:/.test(location.protocol)) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+</script>
+</body>
+</html>

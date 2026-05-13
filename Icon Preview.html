@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>AmazeApp · Icon Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"/>
+<style>
+  html, body { margin: 0; height: 100%; }
+  body {
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(194,40,107,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 50% 100%, rgba(250,185,64,0.08) 0%, transparent 60%),
+      #0a0014;
+    color: #F7D9FC;
+    font-family: 'Inter Tight', sans-serif;
+    padding: 40px 32px 80px;
+    box-sizing: border-box;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #FAB940; display: inline-flex; gap: 8px; align-items: center;
+  }
+  .eyebrow::before { content: ''; width: 8px; height: 8px; background: #FAB940; box-shadow: 0 0 12px #FAB940; }
+  h1 {
+    font-family: 'DM Serif Display', serif; font-style: italic;
+    font-size: 64px; line-height: 1; margin: 8px 0 0; letter-spacing: -0.02em;
+  }
+  h1 .a { color: #E94F8B; }
+  .lede { color: rgba(247,217,252,0.7); font-size: 15px; line-height: 1.55; max-width: 640px; margin-top: 14px; }
+
+  .pixel-edge { height: 1px; background: linear-gradient(90deg, transparent, rgba(247,217,252,0.18), transparent); margin: 32px 0; }
+
+  .hero {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+    margin: 24px 0 8px;
+  }
+  .hero-icon {
+    width: 100%; aspect-ratio: 1; max-width: 460px; justify-self: center;
+    border-radius: 23%;
+    box-shadow: 0 40px 80px rgba(194,40,107,0.35), 0 8px 24px rgba(0,0,0,0.4);
+    background-image: url('app/icon-1024.png');
+    background-size: cover;
+  }
+  .hero-meta h2 {
+    font-family: 'DM Serif Display', serif; font-style: italic;
+    font-size: 32px; margin: 0; color: #F7D9FC; line-height: 1.05;
+  }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 6px 10px; border-radius: 999px;
+    background: rgba(247,217,252,0.04);
+    border: 1px solid rgba(247,217,252,0.12);
+    color: rgba(247,217,252,0.85);
+  }
+  .chip.gold { color: #FAB940; border-color: rgba(250,185,64,0.35); }
+  .chip.pink { color: #E94F8B; border-color: rgba(233,79,139,0.35); }
+  .reasoning {
+    background: rgba(247,217,252,0.04);
+    border: 1px solid rgba(247,217,252,0.08);
+    border-radius: 18px; padding: 18px 20px; margin-top: 22px;
+  }
+  .reasoning .k {
+    font-family: 'Space Mono', monospace; font-size: 9.5px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: #FAB940;
+  }
+  .reasoning ul { margin: 8px 0 0; padding-left: 18px; font-size: 13.5px; line-height: 1.6; color: rgba(247,217,252,0.85); }
+  .reasoning ul li::marker { color: #E94F8B; }
+
+  h3 {
+    font-family: 'Space Mono', monospace; font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(247,217,252,0.55);
+    margin: 32px 0 14px;
+  }
+
+  /* sizes row */
+  .sizes {
+    display: flex; align-items: flex-end; gap: 28px; flex-wrap: wrap;
+    background: rgba(247,217,252,0.03);
+    border: 1px solid rgba(247,217,252,0.08);
+    border-radius: 20px; padding: 28px; margin-bottom: 8px;
+  }
+  .size-cell { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .size-cell img {
+    border-radius: 22.5%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    display: block;
+  }
+  .size-cell .label {
+    font-family: 'Space Mono', monospace; font-size: 9.5px;
+    letter-spacing: 0.14em; color: rgba(247,217,252,0.55);
+  }
+
+  /* homescreen mock */
+  .homescreens {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  .hs {
+    position: relative; aspect-ratio: 9 / 19.5; border-radius: 42px;
+    padding: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(247,217,252,0.1);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .hs.dark { background: linear-gradient(180deg, #2a1230, #0a0014 60%); }
+  .hs.light { background: linear-gradient(180deg, #f6e8f0, #e7c8de 60%); }
+  .hs.gradient { background: linear-gradient(180deg, #fab940, #c2286b 50%, #0a0014 100%); }
+  .hs .top {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Inter Tight'; font-size: 11px; font-weight: 600;
+    padding: 4px 8px 8px;
+  }
+  .hs.dark .top, .hs.gradient .top { color: #F7D9FC; }
+  .hs.light .top { color: #2a1230; }
+  .hs .grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px 10px;
+    padding: 4px;
+  }
+  .hs .app { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .hs .app .ico {
+    width: 100%; aspect-ratio: 1; border-radius: 22.5%;
+    background: rgba(247,217,252,0.18);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  }
+  .hs .app .nm {
+    font-family: 'Inter Tight'; font-size: 8.5px; font-weight: 500;
+    color: inherit; opacity: 0.85;
+  }
+  .hs.dark .app .nm, .hs.gradient .app .nm { color: #F7D9FC; }
+  .hs.light .app .nm { color: #2a1230; }
+  .hs .app.us .ico {
+    background-image: url('app/icon-512.png'); background-size: cover;
+    box-shadow: 0 6px 16px rgba(233,79,139,0.45), 0 4px 8px rgba(0,0,0,0.35);
+  }
+  .hs .app.us .nm { font-weight: 700; }
+  .hs .label-tag {
+    position: absolute; top: 16px; right: 16px;
+    font-family: 'Space Mono', monospace; font-size: 8.5px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 4px 8px; border-radius: 999px;
+    background: rgba(10,0,20,0.5); color: #FAB940;
+    border: 1px solid rgba(250,185,64,0.35);
+  }
+  .hs.light .label-tag { background: rgba(255,255,255,0.65); color: #c2286b; border-color: rgba(194,40,107,0.35); }
+
+  .install {
+    background: rgba(247,217,252,0.04);
+    border: 1px solid rgba(247,217,252,0.08);
+    border-radius: 20px; padding: 26px 28px; margin-top: 32px;
+  }
+  .install h2 {
+    font-family: 'DM Serif Display', serif; font-style: italic;
+    margin: 0 0 14px; font-size: 28px; color: #F7D9FC;
+  }
+  .install ol { padding-left: 22px; line-height: 1.7; font-size: 14px; color: rgba(247,217,252,0.88); }
+  .install code {
+    font-family: 'Space Mono', monospace; font-size: 12px;
+    background: rgba(250,185,64,0.1); color: #FAB940;
+    padding: 1px 6px; border-radius: 4px;
+  }
+  .install a { color: #E94F8B; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .homescreens { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .homescreens { grid-template-columns: 1fr; }
+    h1 { font-size: 44px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="eyebrow">App icon · v1</span>
+  <h1>amaze<span class="a">.</span>app</h1>
+  <p class="lede">Ícono Y2K para la PWA de Macy. Botón cromado-glossy con sparkle dorado y halo de 12 marcas (las 12 semanas del programa). Paleta heredada de la app: magenta · oro · lavanda sobre púrpura profundo.</p>
+
+  <div class="pixel-edge"></div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-icon" aria-label="AmazeApp icon"></div>
+    <div class="hero-meta">
+      <span class="eyebrow">Concepto</span>
+      <h2>Sparkle &amp; halo<br/>— ritual diario</h2>
+      <div class="meta-row">
+        <span class="chip pink">Y2K · web 2.0 glossy</span>
+        <span class="chip gold">cromo dorado</span>
+        <span class="chip">paleta macy.</span>
+        <span class="chip">12 ticks = 12 semanas</span>
+      </div>
+      <div class="reasoning">
+        <div class="k">Decisiones de diseño</div>
+        <ul>
+          <li><strong>Sparkle de 4 puntas (✦)</strong> — ya es el motivo recurrente de tu app (footer, dividers). Universal para "amazing/wow" → encaja con AmazeApp.</li>
+          <li><strong>Halo con 12 ticks</strong> — alude al programa de 12 semanas y al ritmo del hábito (reloj/ciclo). Los 4 ticks cardinales en oro marcan los hitos.</li>
+          <li><strong>Glossy lick superior</strong> — el highlight blanco translúcido es <em>la</em> firma estética Y2K / Web 2.0 (Aqua, iOS 1–6, iPod).</li>
+          <li><strong>Gradiente magenta → púrpura profundo</strong> — toma directamente <code>#C2286B</code> y <code>#0a0014</code> de tu CSS.</li>
+          <li><strong>Cromo dorado en el glifo</strong> — usa <code>#FAB940</code> con un bevel chrome de crema a ámbar, igual que los acentos de la app.</li>
+          <li><strong>Pixel grid sutil</strong> — guiño a interfaces de inicios de los 2000 sin convertirse en ruido.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIZES -->
+  <h3>Tamaños — iOS &amp; PWA</h3>
+  <div class="sizes">
+    <div class="size-cell"><img src="app/icon-120.png" width="60" height="60" alt=""/><span class="label">60 spotlight</span></div>
+    <div class="size-cell"><img src="app/icon-120.png" width="76" height="76" alt=""/><span class="label">76 ipad</span></div>
+    <div class="size-cell"><img src="app/icon-180.png" width="90" height="90" alt=""/><span class="label">90 ios @2x</span></div>
+    <div class="size-cell"><img src="app/icon-180.png" width="120" height="120" alt=""/><span class="label">120 ios</span></div>
+    <div class="size-cell"><img src="app/icon-180.png" width="180" height="180" alt=""/><span class="label">180 home</span></div>
+    <div class="size-cell"><img src="app/icon-512.png" width="240" height="240" alt=""/><span class="label">240 zoom</span></div>
+  </div>
+
+  <!-- HOMESCREEN MOCKS -->
+  <h3>En el contexto · springboard del iPhone</h3>
+  <div class="homescreens">
+    <!-- dark -->
+    <div class="hs dark">
+      <div class="label-tag">dark mode</div>
+      <div class="top"><span>9:41</span><span>● ● ●</span></div>
+      <div style="height:14px"></div>
+      <div class="grid">
+        <div class="app"><div class="ico"></div><div class="nm">Mail</div></div>
+        <div class="app"><div class="ico"></div><div class="nm">Cal</div></div>
+        <div class="app"><div class="ico"></div><div class="nm">Notas</div></div>
+        <div class="app"><div class="ico"></div><div class="nm">Salud</div></div>
+        <div class="app us"><div class="ico"></div><div class="nm">AmazeApp</div></div>
+        <div class="app"><div class="ico"></div><div class="nm">Música</div></div>
+        <div class="app"><div class="ico"></div><div class="nm">Fotos</div></div>
+        <div class="app"><div class="ico"></div><div class="nm">Maps</div></div>
+        <div class="app"><div class="ico"></div><div class="nm">Files</div></div>
+        <div class="app"><div class="ico"></div><div class="nm">Ajustes</div></div>
+        <div class="app"><div class="ico"></div><div class="nm">Strava</div></div>
+        <div class="app"><div class="ico"></div><div class="nm">Spotify</div></div>
+      </div>
+    </div>
+    <!-- light -->
+    <div class="hs light">
+      <div class="label-tag">light mode</div>
+      <div class="top"><span>9:41</span><span>● ● ●</span></div>
+      <div style="height:14px"></div>
+      <div class="grid">
+        <div class="app"><div class="ico" style="background:#f9c"></div><div class="nm">Mail</div></div>
+        <div class="app"><div class="ico" style="background:#fcd"></div><div class="nm">Cal</div></div>
+        <div class="app us"><div class="ico"></div><div class="nm">AmazeApp</div></div>
+        <div class="app"><div class="ico" style="background:#fad"></div><div class="nm">Salud</div></div>
+        <div class="app"><div class="ico" style="background:#eaa"></div><div class="nm">Notas</div></div>
+        <div class="app"><div class="ico" style="background:#dab"></div><div class="nm">Música</div></div>
+        <div class="app"><div class="ico" style="background:#fab"></div><div class="nm">Fotos</div></div>
+        <div class="app"><div class="ico" style="background:#abc"></div><div class="nm">Maps</div></div>
+      </div>
+    </div>
+    <!-- gradient wallpaper -->
+    <div class="hs gradient">
+      <div class="label-tag">y2k wallpaper</div>
+      <div class="top"><span>9:41</span><span>● ● ●</span></div>
+      <div style="height:14px"></div>
+      <div class="grid">
+        <div class="app"><div class="ico" style="background:rgba(255,255,255,0.25)"></div><div class="nm">Mail</div></div>
+        <div class="app"><div class="ico" style="background:rgba(255,255,255,0.25)"></div><div class="nm">Cal</div></div>
+        <div class="app"><div class="ico" style="background:rgba(255,255,255,0.25)"></div><div class="nm">Notas</div></div>
+        <div class="app us"><div class="ico"></div><div class="nm">AmazeApp</div></div>
+        <div class="app"><div class="ico" style="background:rgba(255,255,255,0.25)"></div><div class="nm">Salud</div></div>
+        <div class="app"><div class="ico" style="background:rgba(255,255,255,0.25)"></div><div class="nm">Música</div></div>
+        <div class="app"><div class="ico" style="background:rgba(255,255,255,0.25)"></div><div class="nm">Fotos</div></div>
+        <div class="app"><div class="ico" style="background:rgba(255,255,255,0.25)"></div><div class="nm">Maps</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSTALL INSTRUCTIONS -->
+  <div class="install">
+    <span class="eyebrow">Deploy</span>
+    <h2>cómo publicarlo en Vercel + instalarlo en tu iPhone</h2>
+    <ol>
+      <li>Crea una cuenta gratuita en <a href="https://vercel.com" target="_blank">vercel.com</a> (si no tienes una).</li>
+      <li>Desde este proyecto, descarga todo como <code>.zip</code> (o conéctalo a un repo de GitHub).</li>
+      <li>En Vercel: <strong>Add New → Project → Import</strong>. Sube el zip o elige tu repo.<br/>
+        Como es HTML puro, Vercel lo detecta como <em>Other</em> — déjalo así, sin build command. Solo presiona <strong>Deploy</strong>.</li>
+      <li>Cuando termine te dará una URL tipo <code>amazeapp.vercel.app</code>. Ábrela en <strong>Safari</strong> en tu iPhone (importante: Safari, no Chrome).</li>
+      <li>Toca <strong>Compartir → Añadir a pantalla de inicio</strong>. Confirma el nombre <code>AmazeApp</code> → <strong>Añadir</strong>.</li>
+      <li>Listo. Aparece el ícono con tu sparkle en la pantalla de inicio y se abre <em>full-screen</em>, sin barra de Safari, como una app.</li>
+    </ol>
+    <div class="badges">
+      <span class="chip gold">Manifest ✓</span>
+      <span class="chip gold">Service Worker ✓</span>
+      <span class="chip gold">apple-touch-icon ✓</span>
+      <span class="chip gold">standalone display ✓</span>
+      <span class="chip gold">offline cache ✓</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
